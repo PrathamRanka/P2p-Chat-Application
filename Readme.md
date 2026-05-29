@@ -368,3 +368,32 @@ MIT License
 * https://docs.iroh.computer/examples/chat
 * https://github.com/n0-computer/iroh
 * https://github.com/n0-computer/iroh-gossip
+
+---
+
+## Testing & Automation
+
+Quick local test scripts are provided in the `scripts/` folder to build and show commands
+to run two nodes for manual verification:
+
+- `scripts/local-test.ps1` — PowerShell helper (Windows)
+- `scripts/local-test.sh` — POSIX shell helper (Linux/macOS)
+
+Usage (example):
+
+```powershell
+# Build and show commands
+.\scripts\local-test.ps1
+
+# On device A (or terminal A):
+.\target\release\iroh-gossip-cli.exe create
+
+# On device B (or terminal B), paste ticket from device A:
+.\target\release\iroh-gossip-cli.exe join iroh://<ticket>
+```
+
+CI: A GitHub Actions workflow is included at `.github/workflows/ci.yml` that builds the project
+on Linux, Windows and macOS on push/PR.
+
+Configuration: see `config.example.toml` for runtime options (data dir, log level, ALPNs).
+
