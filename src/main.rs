@@ -6,7 +6,7 @@ use iroh_gossip::net::Gossip;
 
 #[tokio::main] 
 async fn main() -> Result<()> {
-    let secret_key = SecretKey::generate(rand::rngs::OsRng);
+    let secret_key = SecretKey::generate();
     println!("> our secret key: {:?}", secret_key);
 
     let endpoint = Endpoint::builder(presets::Empty)
@@ -14,7 +14,7 @@ async fn main() -> Result<()> {
         .bind()
         .await?;
 
-    println!("> our node id: {}", endpoint.node_id());
+    println!("> our node id: {}", endpoint.id().fmt_short());
 
     let gossip = Gossip::builder().spawn(endpoint.clone());
 
