@@ -31,3 +31,6 @@ jobs:
 
       - name: Build (release)
         run: cargo build --release
+
+      - name: Smoke test (non-interactive)
+        run: cargo run --release -- smoke-test
